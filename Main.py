@@ -54,10 +54,11 @@ def main():
         pe_list = [[pe_arr[2], pe_arr[3], pe_arr[1], pe_arr[0].replace("_", " "),
                     str(pe_arr[-3]).replace("[", "").replace("]", ""),
                     str(pe_arr[-2]).replace("[", "").replace("]", ""),
-                    str(pe_arr[-1]).replace("[", "").replace("]", "")] + pe_arr[4: 12] for pe_arr in pe_list]
+                    str(pe_arr[-1]).replace("[", "").replace("]", "")] + pe_arr[4: 8] + pe_arr[9: 12] for pe_arr in
+                   pe_list]
 
         header = ["Aligned_Sequence", "Reference_Sequence", "Prime-editing", "Mut_type (Major)", "Mut_Position (Major)",
-                  "WT_seq", "Mut_seq", "Unedited", "n_deleted", "n_inserted", "n_mutated", "PE-treated.%Reads",
+                  "WT_seq", "Mut_seq", "Mutated", "n_deleted", "n_inserted", "n_mutated", "PE-treated.%Reads",
                   "BG.%Reads", "Corrected.%Reads"]
         util.make_tsv(WORK_DIR + OU + brcd + "_result.txt", header, pe_list)
 

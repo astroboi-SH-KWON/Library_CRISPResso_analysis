@@ -3,9 +3,16 @@ from astroboi_bio_tools.ToolLogic import ToolLogics
 
 
 class Logics(ToolLogics):
+    def __init__(self):
+
+        super().__init__()
+
+        self.ignr_mut_type = 'WT'
+
     def get_correct_reads(self, bg_dict, pe_list):
         tot_read = 0.0
         for pe_arr in pe_list:
+            mut_type = pe_arr[0]
             alig_seq = pe_arr[2]
             pe_read = float(pe_arr[-1])
             if alig_seq in bg_dict:
@@ -15,11 +22,13 @@ class Logics(ToolLogics):
                 if new_read < 0:
                     new_read = 0.0
                 pe_arr.append(new_read)
-                tot_read += new_read
+                if mut_type != self.ignr_mut_type:
+                    tot_read += new_read
             else:
                 pe_arr.append('NA')
                 pe_arr.append(pe_read)
-                tot_read += pe_read
+                if mut_type != self.ignr_mut_type:
+                    tot_read += pe_read
         return [pe_arr[:-1] + [100 - tot_read] if pe_arr[0] == 'WT' else pe_arr for pe_arr in pe_list]
 
     def get_mut_pos_seqs(self, pe_list):
