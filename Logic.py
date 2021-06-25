@@ -7,7 +7,8 @@ class Logics(ToolLogics):
 
         super().__init__()
 
-        self.ignr_mut_type = 'WT'
+        self.wt_str = 'WT'
+        self.NaN = 'NA'
 
     def get_correct_reads(self, bg_dict, pe_list):
         tot_read = 0.0
@@ -22,14 +23,14 @@ class Logics(ToolLogics):
                 if new_read < 0:
                     new_read = 0.0
                 pe_arr.append(new_read)
-                if mut_type != self.ignr_mut_type:
+                if mut_type != self.wt_str:
                     tot_read += new_read
             else:
-                pe_arr.append('NA')
+                pe_arr.append(self.NaN)
                 pe_arr.append(pe_read)
-                if mut_type != self.ignr_mut_type:
+                if mut_type != self.wt_str:
                     tot_read += pe_read
-        return [pe_arr[:-1] + [100 - tot_read] if pe_arr[0] == 'WT' else pe_arr for pe_arr in pe_list]
+        return [pe_arr[:-1] + [100 - tot_read] if pe_arr[0] == self.wt_str else pe_arr for pe_arr in pe_list]
 
     def get_mut_pos_seqs(self, pe_list):
         for pe_arr in pe_list:
