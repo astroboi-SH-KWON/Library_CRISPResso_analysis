@@ -55,7 +55,7 @@ def main():
                     str(pe_arr[-3]).replace("[", "").replace("]", ""),
                     str(pe_arr[-2]).replace("[", "").replace("]", ""),
                     str(pe_arr[-1]).replace("[", "").replace("]", "")] + pe_arr[4: 8] + pe_arr[9: 12] for pe_arr in
-                   pe_list]
+                   pe_list if pe_arr[11] != 0.0]  # Corrected.%reads == 0 인 row 삭제
 
         header = ["Aligned_Sequence", "Reference_Sequence", "Prime-editing", "Mut_type (Major)", "Mut_Position (Major)",
                   "WT_seq", "Mut_seq", "Mutated", "n_deleted", "n_inserted", "n_mutated", "PE-treated.%Reads",

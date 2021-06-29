@@ -16,7 +16,7 @@ class LogicPreps(ToolLogicPreps):
         self.pure_pe_str = 'Pure_PE'
 
         self.not_prm_edit_str = 'Not_prime-edited'
-        self.prm_edit_str = 'Pure_PE'
+        self.prm_edit_str = 'Prime-edited'
 
     def make_list_to_dict_by_ele(self, data_list, ele_idx):
         result_dict = {}
