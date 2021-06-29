@@ -42,7 +42,7 @@ class Logics(ToolLogics):
 
             for i in range(len(ref_seq)):
                 if ali_seq[i] != ref_seq[i]:
-                    mut_idx_arr.append(i)
+                    mut_idx_arr.append(i + 1)  # mut_pos = i + 1
                     ali_cha_arr.append(ali_seq[i])
                     ref_cha_arr.append(ref_seq[i])
 
