@@ -13,7 +13,7 @@ SYSTEM_NM = platform.system()
 
 if SYSTEM_NM == 'Linux':
     # REAL
-    pass
+    WORK_DIR = "/extdata1/GS/PE_byproduct/PECV_CRISPResso/run_CRISPResso2_in_cmd/"
 else:
     # DEV
     WORK_DIR = "D:/000_WORK/YuGooSang/20210527_CRISPResso2/WORK_DIR/"
@@ -34,8 +34,14 @@ def main():
     logic = Logic.Logics()
 
     file_dict = {}
-    for f_path in util.get_files_recursively(WORK_DIR + IN):
-        util.get_file_path_dict(f_path, file_dict)
+    if SYSTEM_NM == 'Linux':
+        # REAL
+        for f_path in util.get_files_recursively(WORK_DIR + OU):
+            util.get_file_path_dict(f_path, file_dict)
+    else:
+        # DEV
+        for f_path in util.get_files_recursively(WORK_DIR + IN):
+            util.get_file_path_dict(f_path, file_dict)
 
     for brcd, path_arr in file_dict.items():
 
@@ -60,6 +66,7 @@ def main():
         header = ["Aligned_Sequence", "Reference_Sequence", "Prime-editing", "Mut_type (Major)", "Mut_Position (Major)",
                   "WT_seq", "Mut_seq", "Mutated", "n_deleted", "n_inserted", "n_mutated", "PE-treated.%Reads",
                   "BG.%Reads", "Corrected.%Reads"]
+        print(WORK_DIR + OU + brcd + "_result.txt")
         util.make_tsv(WORK_DIR + OU + brcd + "_result.txt", header, pe_list)
 
 
